@@ -7,8 +7,12 @@ import pandas as pd
 
 app=Flask(__name__)
 ## Load the model
-regmodel=pickle.load(open(os.path.join(os.path.dirname(__file__), 'regmodel.pkl'),'rb'))
-scalar=pickle.load(open( os.path.join(os.path.dirname(__file__), 'scaling.pkl'),'rb'))
+app_dir = os.path.dirname(os.path.abspath(__file__))
+regmodel_path = os.path.join(app_dir, 'regmodel.pkl')
+scalar_path = os.path.join(app_dir, 'scaling.pkl')
+
+regmodel = pickle.load(open(regmodel_path, 'rb'))
+scalar = pickle.load(open(scalar_path, 'rb'))
 @app.route('/')
 def home():
     return render_template('home.html')
